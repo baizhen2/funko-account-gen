@@ -24,7 +24,6 @@ class Proxy:
             self.proxyFormat['https'] = None
 
     def isProxyWorking(self):
-        
         #handles bad proxy format
         if self.proxyFormat['https'] != None:
             self.session.proxies.update(self.proxyFormat)
@@ -33,10 +32,11 @@ class Proxy:
 
         #handles proxy connection issues
         try:
-            response = self.session.get("https://httpbin.org/ip", timeout=7) #7 second timeout
+            response = self.session.get("https://httpbin.org/ip", timeout=20) #20 second timeout
 
             if response.status_code == 200:
                 self.proxyAlive = True
+                print("Proxy good")
 
         except requests.exceptions.Timeout:
             print("Proxy timed out")
@@ -44,9 +44,6 @@ class Proxy:
         except requests.exceptions.RequestException:
             print("General proxy error")
             
-        else:
-            print("Unknown Error")
-    
     def validateProxy(self):
         self.parseProxy()
         self.isProxyWorking()
