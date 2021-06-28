@@ -33,13 +33,16 @@ class Proxy:
 
         #handles proxy connection issues
         try:
-            response = self.session.get("https://httpbin.org/ip")
+            response = self.session.get("https://httpbin.org/ip", timeout=7) #7 second timeout
 
             if response.status_code == 200:
                 self.proxyAlive = True
 
+        except requests.exceptions.Timeout:
+            print("Proxy timed out")
+
         except requests.exceptions.RequestException:
-            print("Proxy error")
+            print("General proxy error")
             
         else:
             print("Unknown Error")
