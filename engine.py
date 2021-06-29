@@ -8,6 +8,7 @@ class Engine:
         self.accountList = r'resources\accounts.txt'
 
         self.validProxies = []
+        self.validAccounts = []
 
     def parseTextFile(self, file):
         f = open(file)
@@ -26,7 +27,12 @@ class Engine:
             if new_proxy.validateProxy() != None:
                 self.validProxies.append(new_proxy.proxyFormat)
 
-    
+    def validateAccountList(self):
+        accounts = self.parseTextFile(self.accountList)
+
+        for account in accounts:
+            if account.find("@") != -1: #Checks for email
+                self.validAccounts.append(account)
         
 
 
