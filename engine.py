@@ -49,3 +49,21 @@ class Engine:
             self.tasks.append(newTask)
 
             count += 1
+
+    def setupEngine(self):
+        self.validateProxyList()
+        self.validateAccountList()
+        self.createTasks()
+
+    def runTasks(self):
+        self.setupEngine()
+
+        file = open("generated.txt", "w+")
+
+        for tasks in self.tasks:
+            create = tasks.generateAccount()
+
+            if create == True:
+                file.write(tasks.email + ":" + tasks.password + "\n")
+        
+        file.close()
