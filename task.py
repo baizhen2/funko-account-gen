@@ -26,7 +26,7 @@ class Task:
         self.proxySetup()
         data = self.formSetup()
 
-        response = requests.post('https://www.funko.com/api/users/signup', headers=headers.create_acc_headers, data=data)
+        response = self.session.post('https://www.funko.com/api/users/signup', headers=headers.create_acc_headers, data=data)
 
         if response.status_code != 200:
             print("Account creation failed")
