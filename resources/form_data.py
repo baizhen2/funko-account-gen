@@ -3,6 +3,10 @@ import random
 
 account_data = '{"firstName":"","lastName":"","email":"","password":"","newsletter":true,"accountOrigin":"FUNKO_COM"}'
 fanclub_data = '{"email":"","fanClubOptOut":false,"birthMonth":"","birthDay":"","captcharesponse":""}'
+auth_data = '{"email":"","password":"","returnSecureToken":true}'
+auth_params = (
+    ('key', 'AIzaSyAxsxYDhfpn5yCkpNVQid2K116UmYvUCAk'),
+)
 
 def fillAccForm(firstName, lastName, email, password):
     parsed = json.loads(account_data)
@@ -25,4 +29,11 @@ def registerFanclub(email, captchaToken):
     json_string = json.dumps(parsed)
     return json_string
 
-print(registerFanclub("bob", "hello"))
+def fillAuthData(email, password):
+    parsed = json.loads(auth_data)
+    
+    parsed["email"] = email
+    parsed["password"] = password
+
+    json_string = json.dumps(parsed)
+    return json_string
