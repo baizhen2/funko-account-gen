@@ -2,12 +2,14 @@ import task
 import proxy
 import string
 import random
+import captcha
 
 class Engine:
 
     def __init__(self):
         self.proxyList = 'resources\proxy.txt'
         self.accountList = r'resources\accounts.txt'
+        self.solver = None
 
         self.validProxies = []
         self.validAccounts = []
@@ -37,6 +39,10 @@ class Engine:
             if account.find("@") != -1: #Checks for email
                 self.validAccounts.append(account)
     
+    def setupSolver(self):
+        apiKey = input("Enter 2captcha api key: ")
+        self.solver = captcha.Solver(apiKey)
+
     def createTasks(self):
         count = 0
 
@@ -51,6 +57,7 @@ class Engine:
             count += 1
 
     def setupEngine(self):
+        self.setupSolver()
         self.validateProxyList()
         self.validateAccountList()
         self.createTasks()
