@@ -12,7 +12,3 @@ class Solver:
         captcha = solver.recaptcha(sitekey=self.siteKey, url=self.site)
         token = captcha['code']
         return token
-
-solver = Solver("4f4498353c433e69b3353be8a2fdf888")
-captcha = solver.solve()
-print(captcha)
