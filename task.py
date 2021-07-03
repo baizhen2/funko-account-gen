@@ -1,5 +1,6 @@
 import requests
 import names
+import json
 from resources import headers, form_data
 
 class Task:
@@ -14,7 +15,7 @@ class Task:
     def proxySetup(self):
         self.session.proxies.update(self.proxy)
 
-    def formSetup(self):
+    def accountFormSetup(self):
         return form_data.fillAccForm(
             names.get_first_name(),
             names.get_last_name(),
@@ -24,7 +25,7 @@ class Task:
 
     def generateAccount(self):
         self.proxySetup()
-        data = self.formSetup()
+        data = self.accountFormSetup()
 
         response = self.session.post('https://www.funko.com/api/users/signup', headers=headers.create_acc_headers, data=data)
 
@@ -35,3 +36,13 @@ class Task:
         else:
             print("Account created")
             return True
+        
+    def getAuthToken(self):
+        data = form_data.fillAuthData(self.email, self.password)
+
+        response = requests.post('https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword',
+                            headers=headers.authorization_headers,
+                            params=form_data.auth_params,
+                            data=data)
+        data = json.loads(response.text)
+        return data["idToken"]
