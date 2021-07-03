@@ -40,7 +40,7 @@ class Task:
     def getAuthToken(self):
         data = form_data.fillAuthData(self.email, self.password)
 
-        response = requests.post('https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword',
+        response = self.session.post('https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword',
                             headers=headers.authorization_headers,
                             params=form_data.auth_params,
                             data=data)
