@@ -26,6 +26,7 @@ fanclub_headers = {
     'sec-fetch-site': 'same-origin',
     'sec-fetch-mode': 'cors',
     'sec-fetch-dest': 'empty',
+    'authorization': '',
     'referer': 'https://www.funko.com/my-account',
     'accept-language': 'en-US,en;q=0.9',
 }
