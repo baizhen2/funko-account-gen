@@ -23,6 +23,9 @@ class Task:
             self.password
         )
 
+    def registerFormSetup(self, captchaToken):
+        return form_data.registerFanclub(self.email, captchaToken)
+
     def generateAccount(self):
         self.proxySetup()
         data = self.accountFormSetup()
@@ -46,3 +49,20 @@ class Task:
                             data=data)
         data = json.loads(response.text)
         return data["idToken"]
+    
+    def signupFanclub(self, captchaToken):
+        data = self.registerFormSetup(captchaToken)
+
+        auth_token = self.getAuthToken()
+        fanclub_headers = headers.fanclub_headers
+        fanclub_headers['authorization'] = auth_token
+        
+        response = self.session.put('https://www.funko.com/api/users', headers=fanclub_headers, data=data)
+
+        if response.status_code != 200:
+            print("Account fanclub signup failed")
+            return False
+
+        else:
+            print("Account successfully signed up")
+            return True

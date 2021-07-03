@@ -3,6 +3,7 @@ import proxy
 import string
 import random
 import captcha
+import time
 
 class Engine:
 
@@ -68,9 +69,12 @@ class Engine:
         file = open("generated.txt", "w+")
 
         for tasks in self.tasks:
+            captchaToken = self.solver.solve()
             create = tasks.generateAccount()
+            time.sleep(3)
+            signup = tasks.signupFanclub(captchaToken)
 
-            if create == True:
+            if create == True and signup == True:
                 file.write(tasks.email + ":" + tasks.password + "\n")
         
         file.close()
