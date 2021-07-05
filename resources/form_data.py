@@ -7,6 +7,7 @@ auth_data = '{"email":"","password":"","returnSecureToken":true}'
 auth_params = (
     ('key', 'AIzaSyAxsxYDhfpn5yCkpNVQid2K116UmYvUCAk'),
 )
+address_data = '{"country":"US","isDefault":true,"firstName":"","lastName":"","line1":"","city":"","state":"","zip":""}'
 
 def fillAccForm(firstName, lastName, email, password):
     parsed = json.loads(account_data)
