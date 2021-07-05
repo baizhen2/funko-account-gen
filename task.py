@@ -11,14 +11,19 @@ class Task:
         self.proxy = proxy #proxyDict formatted from task engine
 
         self.session = requests.Session()
+        self.firstName = None
+        self.lastName = None
 
     def proxySetup(self):
         self.session.proxies.update(self.proxy)
 
     def accountFormSetup(self):
+        self.firstName = names.get_first_name()
+        self.lastName = names.get_last_name()
+
         return form_data.fillAccForm(
-            names.get_first_name(),
-            names.get_last_name(),
+            self.firstName,
+            self.lastName,
             self.email,
             self.password
         )
