@@ -4,17 +4,42 @@ import string
 import random
 import captcha
 import time
+import geojson
 
 class Engine:
 
     def __init__(self):
         self.proxyList = 'resources\proxy.txt'
         self.accountList = r'resources\accounts.txt'
+        self.addresses = r'resources\random_address.geojson'
         self.solver = None
+        self.address_json = None
 
         self.validProxies = []
         self.validAccounts = []
         self.tasks = []
+
+    def formatGeoJson(self):
+        with open(self.addresses) as file:
+            lines = file.read().splitlines()
+        
+        with open(self.addresses, "w") as file:
+            line_count = 0
+            last_line = len(lines) - 1
+
+            for line in lines:
+                if line_count == 0:
+                    file.write("[" + line + ",\n")
+                if line_count == last_line:
+                    file.write(line + "]")
+                else:
+                    file.write(line + ",\n")
+                line_count += 1
+
+        with open(self.addresses) as file:
+            gj = geojson.load(file)
+        
+        self.address_json = gj
 
     def parseTextFile(self, file):
         f = open(file)

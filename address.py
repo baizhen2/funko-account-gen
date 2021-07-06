@@ -1,23 +1,22 @@
 import requests
-import geojson
 import json
 import random
 from resources import form_data, headers
 
 class Address:
 
-    def __init__(self, session, firstName, lastName):
+    def __init__(self, session, firstName, lastName, address_json):
         self.data = form_data.address_data
         self.header = headers.address_verification_headers
         self.addresses = r'resources\random_address.geojson'
-
-        self.json_obj = None
+        
+        self.json_obj = address_json
         self.address_data = None
 
         self.session = session
         self.firstName = firstName
         self.lastName = lastName
-    
+
     def formatGeoJson(self):
         with open(self.addresses) as file:
             lines = file.read().splitlines()
