@@ -1,6 +1,7 @@
 import requests
 import json
 import random
+import time
 from resources import form_data, headers
 
 class Address:
@@ -8,7 +9,6 @@ class Address:
     def __init__(self, session, firstName, lastName, address_json):
         self.data = form_data.address_data
         self.header = headers.address_verification_headers
-        self.addresses = r'resources\random_address.geojson'
         
         self.json_obj = address_json
         self.address_data = None
@@ -16,28 +16,6 @@ class Address:
         self.session = session
         self.firstName = firstName
         self.lastName = lastName
-
-    def formatGeoJson(self):
-        with open(self.addresses) as file:
-            lines = file.read().splitlines()
-        
-        with open(self.addresses, "w") as file:
-            line_count = 0
-            last_line = len(lines) - 1
-
-            for line in lines:
-                if line_count == 0:
-                    file.write("[" + line + ",\n")
-                if line_count == last_line:
-                    file.write(line + "]")
-                else:
-                    file.write(line + ",\n")
-                line_count += 1
-
-        with open(self.addresses) as file:
-            gj = geojson.load(file)
-        
-        self.json_obj = gj
 
     def formatAddress(self):
         random_num = random.randint(0, len(self.json_obj) - 1)
@@ -57,11 +35,14 @@ class Address:
                 
         try:
             if data["exactMatch"] == False:
-                line_one = data["candidates"][0]["addressLine"]
+                line_one = data["candidates"][0]["addressLine"][0]
                 city = data["candidates"][0]["city"]
                 state = data["candidates"][0]["state"]
                 zipcode = data["candidates"][0]["postalCode"]
                 self.address_data = form_data.fillAddressInfo(self.firstName, self.lastName, line_one, city, state, zipcode)
+                print(self.address_data)
+
+                return True #Returns true because there is a valid address candidate
             
             if data["exactMatch"] == True:
                 return True
@@ -70,3 +51,19 @@ class Address:
             return False
 
         return False
+    
+    def getAddress(self):
+        verification = False
+        retries = 0
+
+        while verification == False:
+            time.sleep(2)
+            self.formatAddress()
+            verification = self.verifyAddress()
+            
+            if retries == 3:
+                return False
+                
+            retries += 1
+        
+        return self.address_data

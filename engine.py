@@ -87,6 +87,7 @@ class Engine:
         self.validateProxyList()
         self.validateAccountList()
         self.createTasks()
+        self.formatGeoJson()
 
     def runTasks(self):
         self.setupEngine()
@@ -98,8 +99,13 @@ class Engine:
             create = tasks.generateAccount()
             time.sleep(3)
             signup = tasks.signupFanclub(captchaToken)
+            time.sleep(3)
+            add_address = tasks.addAddress(self.address_json)
 
-            if create == True and signup == True:
+            if create == True and signup == True and add_address == True:
                 file.write(tasks.email + ":" + tasks.password + "\n")
+
+            if create == True and signup == True and add_address == False:
+                file.write(tasks.email + ":" + tasks.password + "No Address" + "\n")
         
         file.close()

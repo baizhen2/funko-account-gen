@@ -1,6 +1,7 @@
 import requests
 import names
 import json
+import address
 from resources import headers, form_data
 
 class Task:
@@ -57,10 +58,10 @@ class Task:
     
     def signupFanclub(self, captchaToken):
         data = self.registerFormSetup(captchaToken)
+        self.getAuthToken()
 
-        auth_token = self.getAuthToken()
         fanclub_headers = headers.fanclub_headers
-        fanclub_headers['authorization'] = auth_token
+        fanclub_headers['authorization'] = self.getAuthToken()
         
         response = self.session.put('https://www.funko.com/api/users', headers=fanclub_headers, data=data)
 
@@ -70,4 +71,24 @@ class Task:
 
         else:
             print("Account successfully signed up")
+            return True
+    
+    def addAddress(self, address_json):
+        new_address = address.Address(self.session, self.firstName, self.lastName, address_json)
+        address_headers = headers.submit_address_header
+        address_headers['authorization'] = self.getAuthToken()
+
+        valid_address_data = new_address.getAddress()
+        if valid_address_data == False:
+            print("No valid address parsed")
+            return False
+        
+        response = self.session.post('https://www.funko.com/api/address', headers=address_headers, data=valid_address_data)
+
+        if response.status_code != 200:
+            print("Account address failed to add")
+            return False
+
+        else:
+            print("Account successfully added address")
             return True
