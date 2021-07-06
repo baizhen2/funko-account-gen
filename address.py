@@ -26,8 +26,11 @@ class Address:
                     file.write(line + ",\n")
                 line_count += 1
 
-
-
+    def parseJson(self):
+        with open(self.addresses) as file:
+            gj = geojson.load(file)
+        
+        return gj
 
 
 
@@ -41,3 +44,4 @@ print(response.text) """
 
 new_address = Address()
 new_address.formatGeoJson()
+new_address.parseJson()
