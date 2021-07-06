@@ -38,3 +38,15 @@ def fillAuthData(email, password):
 
     json_string = json.dumps(parsed)
     return json_string
+
+def fillAddressInfo(firstName, lastName, addressLineOne, city, state, zip):
+    parsed = json.loads(address_data)
+    parsed["firstName"] = firstName
+    parsed["lastName"] = lastName
+    parsed["line1"] = addressLineOne
+    parsed["city"] = city
+    parsed["state"] = state
+    parsed["zip"] = zip
+
+    json_string = json.dumps(parsed)
+    return json_string
