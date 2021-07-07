@@ -1,0 +1,12 @@
+Go to https://openaddresses.io/
+Get addresses via geojson format example 
+{"type":"Feature","properties":{"id":"61211","unit":"58","number":"705","street":"SPRING VALLEY RD","city":"ATHENS","district":"","region":"GA","postcode":"30605","hash":"c06d63a20e8382a6"},"geometry":{"type":"Point","coordinates":[-83.3287674,33.9685015]}}
+
+Do not format it yourself to make json objects just copy and paste from openaddresses geojson format, bot will convert it to normal json by itself
+
+example: 
+
+{"type":"Feature","properties":{"id":"22554","unit":"","number":"345","street":"KINGS RD","city":"ATHENS","district":"","region":"GA","postcode":"30606","hash":"80c41d567fe01ff3"},"geometry":{"type":"Point","coordinates":[-83.4544073,33.9302972]}}
+{"type":"Feature","properties":{"id":"22555","unit":"","number":"123","street":"SKYLINE RDG","city":"ATHENS","district":"","region":"GA","postcode":"30606","hash":"22df67c50865c231"},"geometry":{"type":"Point","coordinates":[-83.4308503,33.9302222]}}
+{"type":"Feature","properties":{"id":"22556","unit":"","number":"42","street":"N STRATFORD DR","city":"ATHENS","district":"","region":"GA","postcode":"30605","hash":"67d409f10d5fc0af"},"geometry":{"type":"Point","coordinates":[-83.3408884,33.9298802]}}
+{"type":"Feature","properties":{"id":"22557","unit":"","number":"175","street":"SUNNYBROOK DR","city":"ATHENS","district":"","region":"GA","postcode":"30605","hash":"23035763506cf172"},"geometry":{"type":"Point","coordinates":[-83.3273501,33.9295989]}}
