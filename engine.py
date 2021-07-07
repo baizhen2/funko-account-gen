@@ -9,7 +9,7 @@ import geojson
 class Engine:
 
     def __init__(self):
-        self.proxyList = 'resources\proxy.txt'
+        self.proxyList = r'resources\proxy.txt'
         self.accountList = r'resources\accounts.txt'
         self.addresses = r'resources\random_address.geojson'
         self.solver = None
