@@ -50,7 +50,7 @@ class Address:
 
                 return True #Returns true because there is a valid address candidate
             
-            if data[0]["exactMatch"] == True:
+            if data["exactMatch"] == True:
                 return True
 
         except KeyError: #Bad request to funko servers returning {'candidates': []}
