@@ -38,6 +38,7 @@ class Task:
 
         response = self.session.post('https://www.funko.com/api/users/signup', headers=headers.create_acc_headers, data=data)
         print(response.status_code)
+        print(response.text)
 
         if response.status_code != 200:
             print("Account creation failed")

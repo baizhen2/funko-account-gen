@@ -97,6 +97,10 @@ class Engine:
         for tasks in self.tasks:
             captchaToken = self.solver.solve()
             create = tasks.generateAccount()
+
+            if create == False: #When account creation fails
+                continue
+
             time.sleep(3)
             signup = tasks.signupFanclub(captchaToken)
             time.sleep(3)
