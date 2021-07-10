@@ -27,14 +27,16 @@ class Address:
         zipcode = address["properties"]["postcode"]
 
         self.address_data = form_data.fillAddressInfo(self.firstName, self.lastName, line_one, city, state, zipcode)
+        print(self.address_data)
 
     def verifyAddress(self):
         response = self.session.post('https://www.funko.com/api/address/verify', headers=self.header, data=self.address_data)
 
         data = json.loads(response.text)
+        print("Response: " + str(data))
                 
         try:
-            if data["exactMatch"] == False:
+            if data[0]["exactMatch"] == False:
                 line_one = data["candidates"][0]["addressLine"][0]
                 city = data["candidates"][0]["city"]
                 state = data["candidates"][0]["state"]
@@ -44,7 +46,7 @@ class Address:
 
                 return True #Returns true because there is a valid address candidate
             
-            if data["exactMatch"] == True:
+            if data[0]["exactMatch"] == True:
                 return True
 
         except KeyError: #Bad request to funko servers returning {'candidates': []}
