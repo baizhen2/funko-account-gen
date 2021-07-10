@@ -39,7 +39,8 @@ class Address:
         print("Response: " + str(data))
                 
         try:
-            if data[0]["exactMatch"] == False:
+            if data["exactMatch"] == False:
+                print("False no exact match")
                 line_one = data["candidates"][0]["addressLine"][0]
                 city = data["candidates"][0]["city"]
                 state = data["candidates"][0]["state"]
@@ -56,6 +57,7 @@ class Address:
             print("keyError")
             return False
 
+        print("reach?")
         return False
     
     def getAddress(self):
