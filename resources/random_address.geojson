@@ -3,6 +3,8 @@ Get addresses via geojson format example
 {"type":"Feature","properties":{"id":"61211","unit":"58","number":"705","street":"SPRING VALLEY RD","city":"ATHENS","district":"","region":"GA","postcode":"30605","hash":"c06d63a20e8382a6"},"geometry":{"type":"Point","coordinates":[-83.3287674,33.9685015]}}
 
 Do not format it yourself to make json objects just copy and paste from openaddresses geojson format, bot will convert it to normal json by itself
+**Make sure that the json has the city field filled in**
+**If the postcode is not filled in, the application has handling for that**
 
 example: 
 
