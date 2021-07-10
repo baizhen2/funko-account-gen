@@ -53,6 +53,7 @@ class Address:
                 return True
 
         except KeyError: #Bad request to funko servers returning {'candidates': []}
+            print("keyError")
             return False
 
         return False
@@ -65,6 +66,8 @@ class Address:
             time.sleep(2)
             self.formatAddress()
             verification = self.verifyAddress()
+            print("verification is: ")
+            print(verification)
             
             if retries == 3:
                 return False
