@@ -26,6 +26,9 @@ class Address:
         state = address["properties"]["region"]
         zipcode = address["properties"]["postcode"]
 
+        if zipcode == "":
+            zipcode = self.getZipcode()
+
         self.address_data = form_data.fillAddressInfo(self.firstName, self.lastName, line_one, city, state, zipcode)
         print(self.address_data)
 
@@ -69,3 +72,6 @@ class Address:
             retries += 1
         
         return self.address_data
+
+    def getZipcode(self):
+        return random.randint(15000, 90000)
