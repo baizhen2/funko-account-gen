@@ -5,7 +5,7 @@ account_data = '{"firstName":"","lastName":"","email":"","password":"","newslett
 fanclub_data = '{"email":"","fanClubOptOut":false,"birthMonth":"","birthDay":"","captcharesponse":""}'
 auth_data = '{"email":"","password":"","returnSecureToken":true}'
 auth_params = (
-    ('key', 'AIzaSyAxsxYDhfpn5yCkpNVQid2K116UmYvUCAk'),
+    ('key', 'AIzaSyAxsxYDhfpn5yCkpNVQid2K116UmYvUCAk'), #Funko's google api-key for login auth-tokens, they make it too easy to find... Anyone is free to use it ;)
 )
 address_data = '{"country":"US","isDefault":true,"firstName":"","lastName":"","line1":"","city":"","state":"","zip":""}'
 
